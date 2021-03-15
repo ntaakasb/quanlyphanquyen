@@ -1,0 +1,169 @@
+﻿@model ChartJsViewModel
+@{ ViewData["Title"] = "Tạo User"; }
+
+
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.8/css/all.css">
+
+
+<div class="row mb-3">
+    <div class="col-md-6 offset-3">
+        <div class="card mb-4">
+            <div class="card-header">
+                TẠO MỚI NGƯỜI DÙNG
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-12">
+                        <form class="needs-validation" novalidate>
+                            <div class="form-group input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text"> <i class="fa fa-user" aria-hidden="true"></i></span>
+                                </div>
+                                <input name="Username" class="form-control" placeholder="Tên đăng nhập" type="text" required>
+                                <div class="invalid-feedback">Vui lòng nhập tên đăng nhập.</div>
+                            </div> <!-- form-group// -->
+                            <div class="form-group input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text"> <i class="fa fa-address-card" aria-hidden="true"></i> </span>
+                                </div>
+                                <input name="Fullname" class="form-control" required placeholder="Họ và tên" type="text">
+                                <div class="invalid-feedback">Vui lòng nhập họ tên.</div>
+                            </div> <!-- form-group// -->
+
+                            <div class="form-group input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text"> <i class="fa fa-building"></i> </span>
+                                </div>
+                                <input name="BranchCode" class="form-control" required placeholder="Chi nhánh" type="text">
+                                <div class="invalid-feedback">Vui lòng nhập chi nhánh.</div>
+                            </div> <!-- form-group end.// -->
+
+
+                            <div class="form-group input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text"> <i class="fa fa-envelope" aria-hidden="true"></i></span>
+                                </div>
+                                <input name="Email" class="form-control" placeholder="Email" type="text">
+                            </div> <!-- form-group// -->
+
+
+                            <div class="form-group input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text"> <i class="fa fa-phone" aria-hidden="true"></i></span>
+                                </div>
+                                <input name="Phone" class="form-control" placeholder="Phone" type="text">
+
+                            </div> <!-- form-group// -->
+                            <!-- form-group// -->
+                            <div class="form-group input-group">
+                                <div class="col-md-4">
+                                    <div class="fa-pull-left">
+                                        <input name="status" type="checkbox" value="1" />
+                                    </div>
+                                    &nbsp; Kích hoạt
+                                </div>
+
+                            </div>
+                            <div class="form-group">
+                                <div class="col-md-3 table-list">
+                                    <div class="row todo-list">
+                                        <div class="todo-item">
+                                            <div class="checker"><span class=""><input name="role-id" type="checkbox" value=""></span></div>
+                                            <span>APPSCAN</span>
+                                            <a href="javascript:void(0);" class="float-right remove-todo-item"><i class="icon-close"></i></a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div> <!-- form-group end.// -->
+
+                            <div class="form-group fa-pull-right">
+                                <button type="submit" class="btn btn-primary"> Tạo mới  </button>
+                            </div> <!-- form-group// -->
+                        </form>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--container end.//-->
+
+@section Scripts {
+    <script>
+        $(document).ready(function () {
+            user.init();
+        })
+
+
+        var user = {
+            init: function () {
+                user.validate();
+            },
+            validate: function () {
+                (function () {
+                    'use strict';
+                    window.addEventListener('load', function () {
+                        // Fetch all the forms we want to apply custom Bootstrap validation styles to
+                        var forms = document.getElementsByClassName('needs-validation');
+                        // Loop over them and prevent submission
+                        var validation = Array.prototype.filter.call(forms, function (form) {
+                            form.addEventListener('submit', function (event) {
+                                if (form.checkValidity() === false) {
+                                    event.preventDefault();
+                                    event.stopPropagation();
+                                }
+                                form.classList.add('was-validated');
+                                if (form.checkValidity() === true) {
+                                    var Username = $('input[name=Username]').val();
+                                    var Fullname = $('input[name=Fullname]').val();
+                                    var Email = $('input[name=Email]').val();
+                                    var BranchCode = $('input[name=BranchCode]').val();
+                                    var Phone = $('input[name=Phone]').val();
+                                    var status = $('input[name=status]').is(':checked') ? 1 : 0;
+
+                                    var roleList = [];
+
+                                    $('input[name=role-id]:checked').each(function () {
+                                        var _val = $(this).val();
+                                        var item = {
+                                            roleCode: _val
+                                        };
+                                        roleList.push(item);
+                                    });
+
+                                    var data = {
+                                        username: Username,
+                                        hullname: Fullname,
+                                        email: Email,
+                                        branchCode: BranchCode,
+                                        phone: Phone,
+                                        status: status,
+                                        roleList: roleList
+                                    }
+
+                                    $.ajax('/User/InsertUser',
+                                        {
+                                            type: 'POST',  // http method
+                                            data: data,
+                                            success: function (data, status, xhr) {   // success callback function
+
+                                            },
+                                            error: function (jqXhr, textStatus, errorMessage) { // error callback
+                                                $('p').append('Error: ' + errorMessage);
+                                            }
+                                        });
+                                }
+                            }, false);
+                        });
+                    }, false);
+                })();
+            },
+            insert: function () {
+                
+            }
+        }
+        user.init();
+    </script>
+}

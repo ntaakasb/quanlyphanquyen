@@ -1,0 +1,576 @@
+﻿a {
+    color: #319243;
+}
+
+    a:hover {
+        color: #268e39;
+    }
+
+    .hidden{
+        display: none;
+    }
+
+
+.img-responsive{
+    width: 100%;
+}
+.bg-gradient-primary {
+    background: #319243;
+}
+
+.navbar-nav .sidebar-brand {
+    min-height: 130px;
+}
+
+.nav-link img {
+    max-height: 2rem;
+    width: auto;
+}
+
+.top-nav-search {
+    margin: 10px;
+    width: 100%;
+}
+
+
+.topbar .nav-item .nav-link {
+    height: 100%;
+}
+
+.btn-primary {
+    background-color: #319243;
+    border-color: #95e8a5;
+}
+
+    .btn-primary:hover {
+        background-color: #287b37;
+        border: 1px solid #319243;
+    }
+
+.card {
+    min-height: 100%;
+}
+
+.card-header {
+    padding: .75rem 1.25rem;
+    margin-bottom: 0;
+    background-color: #fff;
+    border-bottom: 1px solid #e3e6f0;
+    COLOR: #319243;
+    font-weight: bold;
+}
+
+
+.bg-custom-toolbar {
+    background: #fff;
+    padding: 0.4rem 1rem;
+    border-radius: .35rem;
+}
+
+.col-xs-5ths,
+.col-sm-5ths,
+.col-md-5ths,
+.col-lg-5ths {
+    position: relative;
+    min-height: 1px;
+    padding-right: 15px;
+    padding-left: 15px;
+}
+
+.col-xs-5ths {
+    width: 20%;
+    float: left;
+}
+
+@media (min-width: 768px) {
+    .col-sm-5ths {
+        width: 20%;
+        float: left;
+    }
+}
+
+@media (min-width: 992px) {
+    .col-md-5ths {
+        width: 20%;
+        float: left;
+    }
+}
+
+@media (min-width: 1200px) {
+    .col-lg-5ths {
+        width: 20%;
+        float: left;
+    }
+}
+
+.card {
+    border: none;
+}
+
+.card-box {
+    padding: 20px;
+    border-radius: 3px;
+    background-color: #fff;
+    border-radius: 5px;
+    box-shadow: 2px 2px 2px #d0d0d03d;
+    min-height: 100%;
+}
+
+.badge-custom-up {
+    color: #fff;
+    background-color: #319243;
+}
+
+.c-green {
+    color: #319243;
+}
+
+.f-bold {
+    font-weight: bold;
+}
+
+.label-input {
+    float: right;
+    padding: 0.3rem;
+}
+
+.input-icon-custom {
+    background: #319243;
+    padding: 5px 10px;
+    color: #fff;
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+}
+/*HIDDENT canvas LISCENCE*/
+.canvasjs-chart-credit {
+    display: none;
+}
+
+
+.car-item .card-box:hover {
+    color: #fff !important;
+    background: #319243;
+    cursor: pointer;
+}
+
+    .car-item .card-box:hover .c-green {
+        color: #fff !important;
+    }
+
+.btn-success {
+    color: #fff;
+    background-color: #319243;
+    border-color: #1cc88a;
+}
+
+#wrapper #content-wrapper {
+    background-color: #f1f6f2;
+}
+
+.detail-link {
+    position: absolute;
+    bottom: 0.2rem;
+    right: 2rem;
+    font-weight: 500;
+    color: #319243
+}
+
+.car-item .card-box:hover .detail-link {
+    color: #fff !important;
+}
+
+/*
+CARD */
+@@media (min-width: 768px) {
+    .circle-tile {
+        margin-bottom: 30px;
+    }
+}
+
+.circle-tile {
+    margin-bottom: 15px;
+    text-align: center;
+}
+
+.circle-tile-heading {
+    position: relative;
+    width: 60px;
+    height: 60px;
+    margin: -2px auto -40px;
+    border: 3px solid rgba(255,255,255,0.3);
+    border-radius: 100%;
+    color: #fff;
+    transition: all ease-in-out .3s;
+    padding: .5rem 0;
+}
+
+/* -- Background Helper Classes */
+
+/* Use these to cuztomize the background color of a div. These are used along with tiles, or any other div you want to customize. */
+
+.dark-blue {
+    background-color: #34495e;
+}
+
+.dark-green {
+    background-color: #319243;
+}
+
+.green {
+    background-color: #16a085;
+}
+
+.white {
+    background: #fff;
+}
+
+.blue {
+    background-color: #2980b9;
+}
+
+.orange {
+    background-color: #f39c12;
+}
+
+.red {
+    background-color: #e74c3c;
+}
+
+.purple {
+    background-color: #8e44ad;
+}
+
+.dark-gray {
+    background-color: #7f8c8d;
+}
+
+.gray {
+    background-color: #95a5a6;
+}
+
+.light-gray {
+    background-color: #bdc3c7;
+}
+
+.yellow {
+    background-color: #f1c40f;
+}
+
+/* -- Text Color Helper Classes */
+
+.text-dark-blue {
+    color: #34495e;
+}
+
+.text-dark-green {
+    color: #319243;
+}
+
+.text-green {
+    color: #16a085;
+}
+
+.text-blue {
+    color: #2980b9;
+}
+
+.text-orange {
+    color: #f39c12;
+}
+
+.text-red {
+    color: #e74c3c;
+}
+
+.text-purple {
+    color: #8e44ad;
+}
+
+.text-faded {
+    color: rgba(255,255,255,0.7);
+}
+
+.text-gray {
+    color: #898989;
+}
+
+
+.circle-tile-heading .fa {
+    line-height: 80px;
+}
+
+.circle-tile-content {
+    padding-top: 50px;
+    border-radius: 1rem;
+}
+
+.circle-tile-description {
+    text-transform: uppercase;
+}
+
+.text-faded {
+    color: rgba(255,255,255,0.7);
+}
+
+.circle-tile-number {
+    padding: 5px 0 15px;
+    font-size: 26px;
+    font-weight: 700;
+    line-height: 1;
+}
+
+.circle-tile-footer {
+    display: block;
+    padding: 5px;
+    color: rgba(255,255,255,0.5);
+    background-color: rgba(0,0,0,0.1);
+    transition: all ease-in-out .3s;
+}
+
+    .circle-tile-footer:hover {
+        text-decoration: none;
+        color: rgba(255,255,255,0.5);
+        background-color: rgba(0,0,0,0.2);
+    }
+
+
+.morning {
+    background: url(https://lh3.googleusercontent.com/-1YbV7nsVnX8/WMugaq-6BEI/AAAAAAAADSg/0wPfQ84vMUcCle_SkgiUDOumUKscMaA8QCL0B/w530-d-h353-p-rw/widget-bg-morning.jpg) center bottom no-repeat;
+    background-size: cover;
+}
+
+.time-widget {
+    margin-top: 5px;
+    overflow: hidden;
+    text-align: center;
+    font-size: 1.75em;
+}
+
+.time-widget-heading {
+    text-transform: uppercase;
+    font-size: .5em;
+    font-weight: 400;
+    color: #fff;
+}
+
+#datetime {
+    color: #fff;
+}
+
+.tile-img {
+    text-shadow: 2px 2px 3px rgba(0,0,0,0.9);
+}
+
+.tile {
+    margin-bottom: 15px;
+    padding: 15px;
+    overflow: hidden;
+    color: #fff;
+}
+
+.border-bottom-1 {
+    border-bottom: 1px solid #eae6e6;
+}
+
+.bottom-home-card {
+    padding: .8rem 1rem;
+}
+
+.ml04 {
+    margin-left: .4rem;
+}
+
+.compare-yesterday-percent {
+    cursor: pointer;
+}
+/*END CARD*/
+
+
+fieldset {
+    border: 1px solid #ddd !important;
+    margin: 0;
+    xmin-width: 0;
+    padding: 10px;
+    position: relative;
+    border-radius: 4px;
+    background-color: #f5f5f5;
+    padding-left: 10px !important;
+}
+
+legend {
+    font-size: 14px;
+    font-weight: bold;
+    margin-bottom: 0px;
+    width: 35%;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    padding: 5px 5px 5px 10px;
+    background-color: #ffffff;
+}
+
+
+/************************* CHECKBOX  ****************************************/
+
+.label-primary {
+    background-color: #319243;
+}
+.material-switch {
+    margin-right: 1rem;
+}
+
+.material-switch > input[type="checkbox"] {
+    display: none;
+  
+}
+
+.material-switch > label {
+    cursor: pointer;
+    height: 0px;
+    position: relative;
+    width: 40px;
+}
+
+    .material-switch > label::before {
+        background: rgb(0, 0, 0);
+        box-shadow: inset 0px 0px 10px rgba(0, 0, 0, 0.5);
+        border-radius: 8px;
+        content: '';
+        height: 16px;
+        margin-top: -8px;
+        position: absolute;
+        opacity: 0.3;
+        transition: all 0.4s ease-in-out;
+        width: 40px;
+    }
+
+    .material-switch > label::after {
+        background: rgb(255, 255, 255);
+        border-radius: 16px;
+        box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.3);
+        content: '';
+        height: 24px;
+        left: -4px;
+        margin-top: -8px;
+        position: absolute;
+        top: -4px;
+        transition: all 0.3s ease-in-out;
+        width: 24px;
+    }
+
+.material-switch > input[type="checkbox"]:checked + label::before {
+    background: inherit;
+    opacity: 0.5;
+}
+
+.material-switch > input[type="checkbox"]:checked + label::after {
+    background: inherit;
+    left: 20px;
+}
+
+/*************************** END CHECK BOX *************************************/
+
+/***************DATA TABLE**************/
+.page-link {
+    color: #319243;
+}
+.page-item.active .page-link {
+    z-index: 1;
+    color: #fff;
+    background-color: #319243;
+    border-color: #19902f;
+}
+/**************** END DATATABLE ******************/
+
+
+/*table LIST*/
+.table-list .todo-nav {
+    margin-top: 10px
+}
+
+.table-list .todo-list {
+    margin: 10px 0
+}
+
+    .table-list .todo-list .todo-item {
+        padding: 15px;
+        margin: 5px 0;
+        border-radius: 0;
+        background: #f7f7f7
+    }
+
+    .table-list .todo-list.only-active .todo-item.complete {
+        display: none
+    }
+
+    .table-list .todo-list.only-active .todo-item:not(.complete) {
+        display: block
+    }
+
+    .table-list .todo-list.only-complete .todo-item:not(.complete) {
+        display: none
+    }
+
+    .table-list .todo-list.only-complete .todo-item.complete {
+        display: block
+    }
+
+    .table-list .todo-list .todo-item.complete span {
+        text-decoration: line-through
+    }
+
+.table-list .remove-todo-item {
+    color: #ccc;
+    visibility: hidden
+}
+
+    .table-list .remove-todo-item:hover {
+        color: #5f5f5f
+    }
+
+.table-list .todo-item:hover .remove-todo-item {
+    visibility: visible
+}
+
+.table-list div.checker {
+    width: 18px;
+    height: 18px
+}
+
+    .table-list div.checker input,
+    .table-list div.checker span {
+        width: 18px;
+        height: 18px
+    }
+
+    .table-list div.checker span {
+        display: -moz-inline-box;
+        display: inline-block;
+        zoom: 1;
+        text-align: center;
+        background-position: 0 -260px;
+    }
+
+    .table-list div.checker, .table-list div.checker input, .table-list div.checker span {
+        width: 19px;
+        height: 19px;
+    }
+
+.table-list div.checker, .table-list div.radio, .table-list div.uploader {
+    position: relative;
+}
+
+.table-list div.button, div.button *, div.checker, div.checker *, div.radio, div.radio *, div.selector, div.selector *, div.uploader, div.uploader * {
+    margin: 0;
+    padding: 0;
+}
+
+.table-list div.button, .table-list div.checker, .table-list div.radio, .table-list div.selector, .table-list div.uploader {
+    display: -moz-inline-box;
+    display: inline-block;
+    zoom: 1;
+    vertical-align: middle;
+}
+
+.table-list .active {
+    background: #efefef;
+}

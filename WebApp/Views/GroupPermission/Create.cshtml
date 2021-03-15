@@ -1,0 +1,164 @@
+﻿@model ChartJsViewModel
+@{ ViewData["Title"] = "Tạo User"; }
+
+
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.8/css/all.css">
+
+
+<div class="row mb-3">
+    <div class="col-md-6 offset-3">
+        <div class="card mb-4">
+            <div class="card-header">
+                TẠO MỚI NHÓM QUYỀN
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-12">
+
+                        <form class="needs-validation" novalidate>
+                            <div class="form-group input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text"> <i class="fa fa-key"></i> </span>
+                                </div>
+                                <input name="" class="form-control no-space" placeholder="Mã nhóm quyền" type="text" required>
+                                <div class="invalid-feedback">Vui lòng nhập mã nhóm quyền.</div>
+                            </div> <!-- form-group// -->
+                            <div class="form-group input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text"> <i class="fa fa-window-maximize"></i> </span>
+                                </div>
+                                <input name="" class="form-control text-uppercase no-space" placeholder="Tên nhóm quyền" required type="text">
+                                <div class="invalid-feedback">Vui lòng nhập tên nhóm quyền</div>
+                            </div> <!-- form-group// -->
+
+                            <fieldset class="mb-3">
+                                <legend>
+                                    <div class="form-group">
+                                        <div class="material-switch fa-pull-left">
+                                            <input id="autoCreatePermission" name="autoCreatePermission" type="checkbox" />
+                                            <label for="autoCreatePermission" class="label-primary"></label>
+                                        </div>
+                                        Tự sinh mã quyền
+                                        <a href="" data-toggle="modal" data-target="#huongdan">   <i class="fa fa-question-circle" aria-hidden="true"></i></a>
+
+                                    </div>
+                                </legend>
+                                <div class="divCreatePermission hidden">
+                                    <div class="form-group input-group">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text"> <i class="fa fa-quote-left"></i> </span>
+                                        </div>
+                                        <input name="" class="form-control text-uppercase no-space" placeholder="Tiền tố mã quyền" type="text">
+                                    </div> <!-- form-group// -->
+                                    <div class="row form-group">
+                                        <div class="col-md-3">
+                                            <div class="material-switch fa-pull-left">
+                                                <input id="permissionView" name="permissionAction" type="checkbox" />
+                                                <label for="permissionView" class="label-primary"></label>
+                                            </div>
+                                            Xem
+                                        </div>
+                                        <div class="col-md-3">
+                                            <div class="material-switch fa-pull-left">
+                                                <input id="permissionCreate" name="permissionAction" type="checkbox" />
+                                                <label for="permissionCreate" class="label-primary"></label>
+                                            </div>
+                                            Thêm
+                                        </div>
+                                        <div class="col-md-3">
+                                            <div class="material-switch fa-pull-left">
+                                                <input id="permissionUpdate" name="permissionAction" type="checkbox" />
+                                                <label for="permissionUpdate" class="label-primary"></label>
+                                            </div>
+                                            Sửa
+                                        </div>
+                                        <div class="col-md-3">
+                                            <div class="material-switch fa-pull-left">
+                                                <input id="permissionDelete" name="permissionAction" type="checkbox" />
+                                                <label for="permissionDelete" class="label-primary"></label>
+                                            </div>
+                                            Xóa
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </fieldset>
+
+                            <div class="form-group fa-pull-right">
+                                <button type="submit" class="btn btn-primary"> Tạo mới  </button>
+                            </div> <!-- form-group// -->
+                        </form>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="huongdan" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Hướng dẫn sử dụng</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                Chức năng tự động tạo mã quyền
+            </div>
+           
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        $(function () {
+            groupPermission.Init();
+            $('.no-space').bind('input', function () {
+                $(this).val(function (_, v) {
+                    return v.replace(/\s+/g, '');
+                });
+            });
+        });
+
+        var groupPermission = {
+            Init: function () {
+                $('body').on('change', '#autoCreatePermission', groupPermission.autoCreatePermission);
+                groupPermission.validate();
+            },
+            autoCreatePermission: function () {
+                if ($(this).is(':checked')) {
+                    $('.divCreatePermission').show('slow');
+                }
+                else {
+                    $('.divCreatePermission').hide('slow');
+                }
+            },
+            validate: function () {
+                // Example starter JavaScript for disabling form submissions if there are invalid fields
+                // Self-executing function
+                (function () {
+                    'use strict';
+                    window.addEventListener('load', function () {
+                        // Fetch all the forms we want to apply custom Bootstrap validation styles to
+                        var forms = document.getElementsByClassName('needs-validation');
+                        // Loop over them and prevent submission
+                        var validation = Array.prototype.filter.call(forms, function (form) {
+                            form.addEventListener('submit', function (event) {
+                                if (form.checkValidity() === false) {
+                                    event.preventDefault();
+                                    event.stopPropagation();
+                                }
+                                form.classList.add('was-validated');
+                            }, false);
+                        });
+                    }, false);
+                })();
+            }
+        }
+    </script>
+}

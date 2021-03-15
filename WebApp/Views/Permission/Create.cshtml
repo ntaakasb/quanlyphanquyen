@@ -1,0 +1,74 @@
+﻿@model ChartJsViewModel
+@{ ViewData["Title"] = "Tạo User"; }
+
+
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.8/css/all.css">
+<!-- Button trigger modal -->
+
+
+<div class="row mb-3">
+    <div class="col-md-6 offset-3">
+        <div class="card mb-4">
+            <div class="card-header">
+                TẠO MỚI QUYỀN NGƯỜI DÙNG
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-12">
+                        <form>
+                            <div class="form-group input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text"> <i class="fa fa-key"></i> </span>
+                                </div>
+                                <input name="" class="form-control" placeholder="Mã quyền" type="text">
+                            </div> <!-- form-group// -->
+                            <div class="form-group input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text"> <i class="fa fa-window-maximize"></i> </span>
+                                </div>
+                                <input name="" class="form-control" placeholder="Tên quyền" type="text">
+                            </div> <!-- form-group// -->
+                            <div class="form-group input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text"> <i class="fa fa-window-restore"></i> </span>
+                                </div>
+                                <select class="form-control">
+                                    <option selected=""> Nhóm quyền</option>
+                                    <option>Designer</option>
+                                    <option>Manager</option>
+                                    <option>Accaunting</option>
+                                </select>
+                            </div> <!-- form-group end.// -->
+                            <div class="form-check">
+                                <div class="row">
+                                    <div class="col-md-3">
+                                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" checked>
+                                        <label class="form-check-label" for="flexCheckDefault">
+                                            Kích hoạt
+                                        </label>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                                        <label class="form-check-label" for="flexCheckDefault">
+                                            Đã xóa
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group fa-pull-right">
+                                <button type="submit" class="btn btn-primary"> Tạo mới  </button>
+                            </div> <!-- form-group// -->
+                        </form>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--container end.//-->
+
+@section Scripts {
+
+}

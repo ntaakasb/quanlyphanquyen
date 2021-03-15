@@ -1,0 +1,12 @@
+[
+  {
+    "key": "Authentication_Api",
+    "endpointCode": "ApiService",
+    "functions": [
+      {
+        "code": "Login",
+        "patch": "ocb/authenticate"
+      }
+    ]
+  }
+]

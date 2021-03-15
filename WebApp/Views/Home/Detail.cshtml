@@ -1,0 +1,391 @@
+﻿@model ChartJsViewModel
+@{ ViewData["Title"] = "Home Page"; }
+
+@*<div class="text-center">
+        <h1 class="display-4">BÁO CÁO THÔNG MINH</h1>
+    </div>*@
+
+<style>
+</style>
+
+<div class="row mb-3">
+    <div class="col-md-12">
+        <div class="card mb-4">
+            <div class="card-header">
+                ĐIỀU KIỆN
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-2">
+                        <label class="label-input">
+                            Ngày tìm kiếm
+                        </label>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <div class='input-group date' id='datetimepicker1'>
+                                <input type="text" id="datetimepicker2" class="form-control" value="@DateTime.Now.ToString("dd/MM/yyyy")" />
+                                <span class="input-group-addon input-icon-custom">
+                                    <span class="fa fa-calendar"></span>
+                                </span>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row mb-3">
+    <div class="col-md-6">
+        <div class="row mb-2">
+            <div class="col-lg-6 col-sm-6">
+                <div class="card-box tilebox-one">
+
+                    <h6 class="text-uppercase  mt-0 c-green f-bold">Đăng ký khám bệnh</h6>
+                    <h2 class="countnumber">0</h2>
+                </div>
+            </div>
+            <div class="col-lg-6 col-sm-6">
+                <div class="card-box tilebox-one">
+
+                    <h6 class="text-uppercase  mt-0 c-green f-bold">Chờ khám bệnh</h6>
+                    <h2 class="countnumber">0</h2>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-6 col-sm-6">
+                <div class="card-box tilebox-one">
+
+                    <h6 class="text-uppercase  mt-0 c-green f-bold">Đang được khám</h6>
+                    <h2 class="countnumber">0</h2>
+                </div>
+            </div>
+            <div class="col-lg-6 col-sm-6">
+                <div class="card-box tilebox-one">
+
+                    <h6 class="text-uppercase  mt-0 c-green f-bold">Đã khám xong</h6>
+                    <h2 class="countnumber">0</h2>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="card mb-4">
+            <div class="card-header">
+                <svg class="svg-inline--fa fa-chart-area fa-w-16 mr-1" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="chart-area" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" data-fa-i2svg=""><path fill="currentColor" d="M500 384c6.6 0 12 5.4 12 12v40c0 6.6-5.4 12-12 12H12c-6.6 0-12-5.4-12-12V76c0-6.6 5.4-12 12-12h40c6.6 0 12 5.4 12 12v308h436zM372.7 159.5L288 216l-85.3-113.7c-5.1-6.8-15.5-6.3-19.9 1L96 248v104h384l-89.9-187.8c-3.2-6.5-11.4-8.7-17.4-4.7z"></path></svg><!-- <i class="fas fa-chart-area mr-1"></i> Font Awesome fontawesome.com -->
+                THỐNG KÊ SỐ LƯỢNG BỆNH NHÂN ĐẾN KHÁM TRONG 7 NGÀY
+            </div>
+            <div class="card-body">
+
+                <div id="chartdenkhamtrong7ngay" style="height: 300px; width: 100%;"></div>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- end row -->
+@*<vc:chartjs></vc:chartjs>*@
+
+<div class="row mb-3">
+    <div class="col-md-6">
+        <div class="card mb-4">
+            <div class="card-header">
+                <svg class="svg-inline--fa fa-chart-area fa-w-16 mr-1" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="chart-area" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" data-fa-i2svg=""><path fill="currentColor" d="M500 384c6.6 0 12 5.4 12 12v40c0 6.6-5.4 12-12 12H12c-6.6 0-12-5.4-12-12V76c0-6.6 5.4-12 12-12h40c6.6 0 12 5.4 12 12v308h436zM372.7 159.5L288 216l-85.3-113.7c-5.1-6.8-15.5-6.3-19.9 1L96 248v104h384l-89.9-187.8c-3.2-6.5-11.4-8.7-17.4-4.7z"></path></svg><!-- <i class="fas fa-chart-area mr-1"></i> Font Awesome fontawesome.com -->
+                THỐNG KÊ SỐ LƯỢNG BỆNH NHÂN ĐẾN KHÁM TRONG NGÀY
+            </div>
+            <div class="card-body">
+                <div id="chartTongQuan" style="height: 300px; width: 100%;"></div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="card mb-4">
+            <div class="card-header">
+                <svg class="svg-inline--fa fa-chart-area fa-w-16 mr-1" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="chart-area" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" data-fa-i2svg=""><path fill="currentColor" d="M500 384c6.6 0 12 5.4 12 12v40c0 6.6-5.4 12-12 12H12c-6.6 0-12-5.4-12-12V76c0-6.6 5.4-12 12-12h40c6.6 0 12 5.4 12 12v308h436zM372.7 159.5L288 216l-85.3-113.7c-5.1-6.8-15.5-6.3-19.9 1L96 248v104h384l-89.9-187.8c-3.2-6.5-11.4-8.7-17.4-4.7z"></path></svg><!-- <i class="fas fa-chart-area mr-1"></i> Font Awesome fontawesome.com -->
+                ThỐNG KÊ THEO KHOẢNG THỜI GIAN KHÁM
+            </div>
+            <div class="card-body">
+                <div id="chartKhoangThoiGianKham" style="height: 300px; width: 100%;"></div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+
+<div class="row">
+    <div class="col-md-6">
+        <div class="card mb-4">
+            <div class="card-header">
+                <svg class="svg-inline--fa fa-chart-area fa-w-16 mr-1" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="chart-area" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" data-fa-i2svg=""><path fill="currentColor" d="M500 384c6.6 0 12 5.4 12 12v40c0 6.6-5.4 12-12 12H12c-6.6 0-12-5.4-12-12V76c0-6.6 5.4-12 12-12h40c6.6 0 12 5.4 12 12v308h436zM372.7 159.5L288 216l-85.3-113.7c-5.1-6.8-15.5-6.3-19.9 1L96 248v104h384l-89.9-187.8c-3.2-6.5-11.4-8.7-17.4-4.7z"></path></svg><!-- <i class="fas fa-chart-area mr-1"></i> Font Awesome fontawesome.com -->
+                THỰC HIỆN CẬN LÂM SÀNG THEO THỜI GIAN (CLS)
+            </div>
+            <div class="card-body">
+                <canvas id="clsChart"></canvas>
+
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="card mb-4">
+            <div class="card-header">
+                <svg class="svg-inline--fa fa-chart-area fa-w-16 mr-1" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="chart-area" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" data-fa-i2svg=""><path fill="currentColor" d="M500 384c6.6 0 12 5.4 12 12v40c0 6.6-5.4 12-12 12H12c-6.6 0-12-5.4-12-12V76c0-6.6 5.4-12 12-12h40c6.6 0 12 5.4 12 12v308h436zM372.7 159.5L288 216l-85.3-113.7c-5.1-6.8-15.5-6.3-19.9 1L96 248v104h384l-89.9-187.8c-3.2-6.5-11.4-8.7-17.4-4.7z"></path></svg><!-- <i class="fas fa-chart-area mr-1"></i> Font Awesome fontawesome.com -->
+                THỐNG KÊ KHÁM CHỮA BỆNH
+            </div>
+            <div class="card-body">
+                <vc:chart-view-kham-chua-benh-theo-bao-hiem></vc:chart-view-kham-chua-benh-theo-bao-hiem>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+@section Scripts{
+    <script>
+        window.onload = function () {
+
+
+            var chartdenkhamtrong7ngay = new CanvasJS.Chart("chartdenkhamtrong7ngay", {
+                animationEnabled: true,
+
+                axisY: {
+                    title: "Người"
+                },
+                legend: {
+                    cursor: "pointer",
+                    itemclick: toggleDataSeries
+                },
+                data: [{
+                    type: "spline",
+                    dataPoints: [
+                        { label: "@(DateTime.Now.AddDays(-6).ToString("dd/MM"))", y: 1444 },
+                          { label: "@(DateTime.Now.AddDays(-5).ToString("dd/MM"))", y: 1244 },
+                        { label: "@(DateTime.Now.AddDays(-4).ToString("dd/MM"))" , y: 1237 },
+                        { label: "@(DateTime.Now.AddDays(-3).ToString("dd/MM"))" , y: 1336 },
+                        { label: "@(DateTime.Now.AddDays(-2).ToString("dd/MM"))" , y: 1136 },
+                        { label: "@(DateTime.Now.AddDays(-1).ToString("dd/MM"))" , y: 1046 },
+                        { label: "@(DateTime.Now.ToString("dd/MM"))" , y: 1546 }
+                    ]
+                }]
+            });
+            chartdenkhamtrong7ngay.render();
+
+            var chart = new CanvasJS.Chart("chartTongQuan", {
+                animationEnabled: true,
+
+                title: {
+                    text: ""
+                },
+                axisX: {
+                    interval: 1
+                },
+                axisY2: {
+                    interlacedColor: "rgba(1,77,101,.2)",
+                    gridColor: "#007716",
+                    title: "Người"
+                },
+                data: [{
+                    type: "bar",
+                    name: "companies",
+                    axisYType: "secondary",
+                    color: "#007716",
+                    dataPoints: [
+
+                        { y: 28, label: "Dưới 15p" },
+                        { y: 29, label: "16p - 30p" },
+                        { y: 52, label: "31p  45p" },
+                        { y: 103, label: "46p - 60p" },
+                        { y: 134, label: "61p - 90p" },
+                        { y: 64, label: "90p - 120p" },
+                        { y: 3, label: "trên 120p" }
+                    ]
+                }]
+            });
+            chart.render();
+
+            var chartKhoangThoiGianKham = new CanvasJS.Chart("chartKhoangThoiGianKham", {
+                animationEnabled: true,
+                title: {
+                    text: ""
+                },
+                axisY: {
+                    title: "",
+                    titleFontColor: "#4F81BC",
+                    lineColor: "#4F81BC",
+                    labelFontColor: "#4F81BC",
+                    tickColor: "#4F81BC"
+                },
+                axisY2: {
+                    title: "",
+                    titleFontColor: "#C0504E",
+                    lineColor: "#C0504E",
+                    labelFontColor: "#C0504E",
+                    tickColor: "#C0504E"
+                },
+                toolTip: {
+                    shared: true
+                },
+                legend: {
+                    cursor: "pointer",
+                    itemclick: toggleDataSeries
+                },
+                data: [{
+                    type: "column",
+                    name: "Hôm qua",
+                    legendText: "Hôm qua",
+                    showInLegend: true,
+                    dataPoints: [
+                        { label: "Từ 0 - 1h", y: 321 },
+                        { label: "Từ 1 - 2h", y: 124 },
+                        { label: "Trên 2h", y: 221 }
+                    ]
+                },
+                {
+                    type: "column",
+                    name: "Hôm nay",
+                    legendText: "Hôm nay",
+                    axisYType: "secondary",
+                    showInLegend: true,
+                    dataPoints: [
+                        { label: "Từ 0 - 1h", y: 423 },
+                        { label: "Từ 1 - 2h", y: 231 },
+                        { label: "Trên 2h", y: 123 }
+                    ]
+                }]
+            });
+            chartKhoangThoiGianKham.render();
+
+
+            var chartLineKCB = new CanvasJS.Chart("chartLineKCB", {
+                animationEnabled: true,
+                theme: "light2",
+                data: [{
+                    type: "line",
+                    indexLabelFontSize: 16,
+                    dataPoints: [
+                        { y: 450 },
+                        { y: 414 },
+                        { y: 520, indexLabel: "\u2191 highest", markerColor: "red", markerType: "triangle" },
+                        { y: 460 },
+                        { y: 450 },
+                        { y: 500 },
+                        { y: 480 },
+                        { y: 480 },
+                        { y: 410, indexLabel: "\u2193 lowest", markerColor: "DarkSlateGrey", markerType: "cross" },
+                        { y: 500 },
+                        { y: 480 },
+                        { y: 510 }
+                    ]
+                }]
+            });
+            chartLineKCB.render();
+
+            Chart.pluginService.register({
+                beforeDraw: function (chart) {
+                    if (chart.config.options.elements.center) {
+                        // Get ctx from string
+                        var ctx = chart.chart.ctx;
+
+                        // Get options from the center object in options
+                        var centerConfig = chart.config.options.elements.center;
+                        var fontStyle = centerConfig.fontStyle || 'Arial';
+                        var txt = centerConfig.text;
+                        var color = centerConfig.color || '#000';
+                        var maxFontSize = centerConfig.maxFontSize || 75;
+                        var sidePadding = centerConfig.sidePadding || 20;
+                        var sidePaddingCalculated = (sidePadding / 100) * (chart.innerRadius * 2)
+                        // Start with a base font of 30px
+                        ctx.font = "30px " + fontStyle;
+
+                        // Get the width of the string and also the width of the element minus 10 to give it 5px side padding
+                        var stringWidth = ctx.measureText(txt).width;
+                        var elementWidth = (chart.innerRadius * 2) - sidePaddingCalculated;
+
+                        // Find out how much the font can grow in width.
+                        var widthRatio = elementWidth / stringWidth;
+                        var newFontSize = Math.floor(30 * widthRatio);
+                        var elementHeight = (chart.innerRadius * 2);
+
+                        // Pick a new font size so it will not be larger than the height of label.
+                        var fontSizeToUse = Math.min(newFontSize, elementHeight, maxFontSize);
+                        var minFontSize = centerConfig.minFontSize;
+                        var lineHeight = centerConfig.lineHeight || 25;
+                        var wrapText = false;
+
+                        if (minFontSize === undefined) {
+                            minFontSize = 20;
+                        }
+
+                        if (minFontSize && fontSizeToUse < minFontSize) {
+                            fontSizeToUse = minFontSize;
+                            wrapText = true;
+                        }
+
+                        // Set font settings to draw it correctly.
+                        ctx.textAlign = 'center';
+                        ctx.textBaseline = 'middle';
+                        var centerX = ((chart.chartArea.left + chart.chartArea.right) / 2);
+                        var centerY = ((chart.chartArea.top + chart.chartArea.bottom) / 2);
+                        ctx.font = fontSizeToUse + "px " + fontStyle;
+                        ctx.fillStyle = color;
+
+                        if (!wrapText) {
+                            ctx.fillText(txt, centerX, centerY);
+                            return;
+                        }
+
+                        var words = txt.split(' ');
+                        var line = '';
+                        var lines = [];
+
+                        // Break words up into multiple lines if necessary
+                        for (var n = 0; n < words.length; n++) {
+                            var testLine = line + words[n] + ' ';
+                            var metrics = ctx.measureText(testLine);
+                            var testWidth = metrics.width;
+                            if (testWidth > elementWidth && n > 0) {
+                                lines.push(line);
+                                line = words[n] + ' ';
+                            } else {
+                                line = testLine;
+                            }
+                        }
+
+                        // Move the center up depending on line height and number of lines
+                        centerY -= (lines.length / 2) * lineHeight;
+
+                        for (var n = 0; n < lines.length; n++) {
+                            ctx.fillText(lines[n], centerX, centerY);
+                            centerY += lineHeight;
+                        }
+                        //Draw text in center
+                        ctx.fillText(line, centerX, centerY);
+                    }
+                }
+            });
+
+
+
+        }
+
+        function toggleDataSeries(e) {
+            if (typeof (e.dataSeries.visible) === "undefined" || e.dataSeries.visible) {
+                e.dataSeries.visible = false;
+            }
+            else {
+                e.dataSeries.visible = true;
+            }
+            chart.render();
+        }
+
+
+
+    </script>
+}

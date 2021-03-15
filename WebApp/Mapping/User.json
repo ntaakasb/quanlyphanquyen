@@ -1,0 +1,12 @@
+[
+  {
+    "key": "User_Api",
+    "endpointCode": "ApiService",
+    "functions": [
+      {
+        "code": "InsertUser",
+        "patch": "internal-api/ocb-authentication/executeInternalUserInfo"
+      }
+    ]
+  }
+]

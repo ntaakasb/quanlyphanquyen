@@ -1,0 +1,285 @@
+﻿@model Base.Model.Authentication.LoginViewModel
+@{
+    Layout = null;
+
+}
+<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet" />
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" />
+
+
+<style>
+    body {
+        background: url('/img/bg-login.jpg');
+        color: #000;
+        overflow-x: hidden;
+        height: 100%;
+        background-repeat: no-repeat;
+background-size: cover;
+    }
+
+    .card0 {
+        box-shadow: 0px 4px 8px 0px #757575;
+        border-radius: 1rem;
+    }
+
+
+    .logo {
+        width: auto;
+        max-height: 100px;
+        margin-top: 20px;
+        margin-left: 60px
+    }
+
+    .image {
+        width: 360px;
+        height: 280px
+    }
+
+    .border-line {
+        border-right: 1px solid #EEEEEE
+    }
+
+    .facebook {
+        background-color: #3b5998;
+        color: #fff;
+        font-size: 18px;
+        padding-top: 5px;
+        border-radius: 50%;
+        width: 35px;
+        height: 35px;
+        cursor: pointer
+    }
+
+    .twitter {
+        background-color: #1DA1F2;
+        color: #fff;
+        font-size: 18px;
+        padding-top: 5px;
+        border-radius: 50%;
+        width: 35px;
+        height: 35px;
+        cursor: pointer
+    }
+
+    .linkedin {
+        background-color: #2867B2;
+        color: #fff;
+        font-size: 18px;
+        padding-top: 5px;
+        border-radius: 50%;
+        width: 35px;
+        height: 35px;
+        cursor: pointer
+    }
+
+    .line {
+        height: 1px;
+        width: 45%;
+        background-color: #E0E0E0;
+        margin-top: 10px
+    }
+
+    .or {
+        width: 10%;
+        font-weight: bold
+    }
+
+    .text-sm {
+        font-size: 1.2rem !important
+    }
+
+    ::placeholder {
+        color: #BDBDBD;
+        opacity: 1;
+        font-weight: 300
+    }
+
+    :-ms-input-placeholder {
+        color: #BDBDBD;
+        font-weight: 300
+    }
+
+    ::-ms-input-placeholder {
+        color: #BDBDBD;
+        font-weight: 300
+    }
+
+    input,
+    textarea {
+        padding: 10px 12px 10px 12px;
+        border: 1px solid lightgrey;
+        border-radius: 2px;
+        margin-bottom: 5px;
+        margin-top: 2px;
+        width: 100%;
+        box-sizing: border-box;
+        color: #019f99;
+        font-size: 14px;
+        letter-spacing: 1px
+    }
+
+        input:focus,
+        textarea:focus {
+            -moz-box-shadow: none !important;
+            -webkit-box-shadow: none !important;
+            box-shadow: none !important;
+            border: 1px solid #1f7543;
+            outline-width: 0
+        }
+
+    button:focus {
+        -moz-box-shadow: none !important;
+        -webkit-box-shadow: none !important;
+        box-shadow: none !important;
+        outline-width: 0
+    }
+
+    a {
+        color: inherit;
+        cursor: pointer
+    }
+
+    .btn-blue {
+        background-color: #1A237E;
+        width: 150px;
+        color: #fff;
+        border-radius: 2px
+    }
+
+        .btn-blue:hover {
+            background-color: #000;
+            cursor: pointer
+        }
+
+    .bg-blue {
+        color: #fff;
+        background-color: #1A237E
+    }
+
+    .bg-green {
+        color: #fff;
+        background-color: #319243;
+    }
+
+    .btn-green {
+        color: #fff;
+        background: #319243;
+    }
+
+        .btn-green:hover {
+            background-color: #2d6765;
+            color: #fff;
+            cursor: pointer
+        }
+
+    @@media screen and (max-width: 991px) {
+        .logo {
+            margin-left: 0px
+        }
+
+        .image {
+            width: 300px;
+            height: 220px
+        }
+
+        .border-line {
+            border-right: none
+        }
+
+        .card2 {
+            border-top: 1px solid #EEEEEE !important;
+            margin: 0px 15px
+        }
+    }
+
+    .mb-5 {
+        margin-bottom: 2rem;
+    }
+
+    .text-center {
+        text-align: center;
+    }
+
+    h1 {
+        text-align: left;
+        width: 100%;
+        color: #319243;
+        text-transform: uppercase;
+        margin: 2rem;
+    }
+
+    .bg-left-login {
+        background-image: url(/img/bg-left-login.jpg);
+        background-repeat: no-repeat;
+        background-position: center;
+        width: 100%;
+        height: 100%;
+        background-size: contain;
+        border-top-left-radius: 1rem;
+        border-bottom-left-radius: 1rem;
+    }
+
+    .logo-login{
+        margin: 2rem;
+        max-width: 200px;
+    }
+
+    .btn-fw{
+        width: 100%;
+    }
+</style>
+
+<div class="container px-1 px-md-5 px-lg-1 px-xl-5 py-5 mx-auto">
+    <div class="card card0 border-0">
+
+        <div class="row d-flex">
+            <div class="col-lg-6">
+                <div class="card1 pb-5 bg-left-login">
+                    <img class="logo-login" src="~/img/logo.png" />
+
+                </div>
+            </div>
+            <div class="col-lg-6" style="padding: 1rem 2rem;">
+                <div class="row">
+                    <h1>Hệ thống quản lý phân quyền tập trung</h1>
+                </div>
+                <form id="frmLogin" class="card2 card border-0 px-4" method="post" asp-antiforgery="true" asp-controller="Account" asp-action="Login">
+                    <input asp-for="ReturnUrl" type="hidden" />
+                    <div class="text-center">
+                        <div class="invalid-feedback" asp-validation-summary="ModelOnly"></div>
+                    </div>
+
+                    <div class="row px-3 mb-4">
+                        <label class="mb-1">
+                            <h4 class="mb-0 text-sm">Tài khoản</h4>
+
+                        </label>
+                        <input asp-for="UserAccount" class="form-control form-control-lg" type="text"  autocomplete="off" id="email">
+                        <span asp-validation-for="UserAccount"></span>
+                    </div>
+                    <div class="row px-3 mb-4">
+                        <label class="mb-1">
+                            <h4 class="mb-0 text-sm">Mật khẩu</h4>
+                        </label>
+                        <input asp-for="UserSecret" class="form-control form-control-lg" type="password" autocomplete="off" id="password">
+                        <span asp-validation-for="UserSecret"></span>
+                    </div>
+                    <div class="row px-3 mb-4">
+                        <div class="custom-control custom-checkbox custom-control-inline"> <input id="chk1" type="checkbox" name="chk" class="custom-control-input"> <label for="chk1" class="custom-control-label text-sm">Lưu thông tin</label> </div> <a href="#" class="ml-auto mb-0 text-sm">Quên mật khẩu?</a>
+                    </div>
+                    <div class="row mb-3 px-3 mb-5"> <button type="submit" id="btnDangNhap" class="btn btn-green btn-fw text-center">Đăng nhập</button> </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script>
+    $('#frmLogin').submit(function (e) {
+        if ($('#email').val() == "" || $('#password').val() == "") {
+            return;
+        }
+    });
+</script>

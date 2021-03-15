@@ -1,0 +1,159 @@
+API LOGIN GET TOKEN
+LINK: http://10.96.60.67:8100/ocb/authenticate
+INPUT
+{
+	"username" :"gdv.01",
+	"password" :"abc@123",
+    "appCode":"APP_ADMIN"
+}
+OUTPUT SUCCESS
+{
+    "errorCode": 0,
+    "errorMsg": "SUCCESS",
+    "jwttoken": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJnZHYuMDEiLCJleHAiOjE2MTQ4NDQ5OTEsImlhdCI6MTYxNDgyNjk5MX0.4y7JByajkkt3Ss-sL0ZegRSQemMeJSx2LqcrWoaOi5HCkTjLdv9o4UuMF_Z3RbEMq2pyXTdceCUAQOyJsCqSWQ",
+    "application": [
+        {
+            "appCode": "APPSCAN",
+            "appName": "Scan ch? ký"
+        },
+        {
+            "appCode": "XLN",
+            "appName": "X? lý n?"
+        }
+    ],
+    "branchCode": "VN0010037"
+}
+OUTPUT FAILURE
+{
+    "errorCode": 1,
+    "errorMsg": "INVALID_CREDENTIALS"
+}
+API CH?NH THÊM, CH?NH S?A USER
+LINK: http://10.96.60.67:8100/internal-api/ocb-authentication/executeInternalUserInfo
+INPUT
+{
+   "trace":{
+      "userId":"gdv.01",
+      "appCode":"APP_ADMIN",
+      "clientTransId":"5dbed546-05fe-47d8-bb2d-1a85ce5ffcdf",
+      "clientTimestamp":"1614832964"
+   },
+   "data":{
+	"userName": "abc",
+	"fullName": "abc",
+	"branchCode": "VN0010037",
+	"email": "abc@ocb.com.vn",
+	"phone": "0123456789",
+	"status": "1",
+	"roleList": [{ "roleCode": "APPSCAN"},{ "roleCode": "XLN"}],
+	"actionType": "INSERT",
+	"userType": "USER"
+	}
+}
+
+OUTPUT SUCCESS
+{
+    "trace": {
+        "userId": "gdv.01",
+        "appCode": "APP_ADMIN",
+        "clientTransId": "5dbed546-05fe-47d8-bb2d-1a85ce5ffcdf",
+        "clientTimestamp": 1614832964
+    },
+    "result": {
+        "totalRecord": 0,
+        "errorCode": "0",
+        "errorMsg": "SUCCESS"
+    },
+    "timestamp": 1614839573
+}
+
+API TÌM KI?M USER
+LINK: http://10.96.60.67:8100/internal-api/ocb-authentication/selectUserInfo
+INPUT
+{
+   "trace":{
+      "userId":"gdv.01",
+      "appCode":"APP_ADMIN",
+      "clientTransId":"5dbed546-05fe-47d8-bb2d-1a85ce5ffcdf",
+      "clientTimestamp":"1614832964"
+   },
+   "data":{
+        "search": {
+            "fromDate": "",
+            "toDate": "",
+            "userName": "",
+            "name": "",
+            "email": "",
+            "branchCode": "",
+            "status": "",
+            "roleCode": "SUPERADMIN",
+            "appCode": ""
+        },
+        "paging": {
+            "pageNo": 1,
+            "pageSize": 5
+        }
+	}
+}
+
+OUTPUT SUCCESS
+{
+    "trace": {
+        "userId": "gdv.01",
+        "appCode": "APP_ADMIN",
+        "clientTransId": "5dbed546-05fe-47d8-bb2d-1a85ce5ffcdf",
+        "clientTimestamp": 1614832964
+    },
+    "result": {
+        "totalRecord": 2,
+        "userList": [
+            {
+                "userName": "abc2",
+                "fullName": "abc2",
+                "email": "abc@ocb.com.vn",
+                "branchCode": "VN0010037",
+                "branchName": "CN Tan Binh",
+                "mobileNo": "0123456788",
+                "status": "1",
+                "roleList": [
+                    {
+                        "roleCode": "SUPERADMIN"
+                    }
+                ],
+                "lastUpdatedBy": "gdv.01",
+                "lastUpdatedDate": "2021-03-04 06:32:53.0"
+            },
+            {
+                "userName": "gdv.01",
+                "fullName": "Giao d?ch viên 01",
+                "email": "gdv.01@oricombank.vn",
+                "branchCode": "VN0010037",
+                "branchName": "CN Tan Binh",
+                "mobileNo": "0902554422",
+                "status": "1",
+                "roleList": [
+                    {
+                        "roleCode": "SUPERADMIN"
+                    }
+                ],
+                "lastUpdatedBy": "ksv.01",
+                "lastUpdatedDate": "2020-08-14 08:05:00.0"
+            }
+        ]
+    },
+    "timestamp": 1614839822
+}
+OUTPUT FAILURE
+{
+    "trace": {
+        "userId": "gdv.01",
+        "appCode": "APP_ADMIN",
+        "clientTransId": "5dbed546-05fe-47d8-bb2d-1a85ce5ffcdf",
+        "clientTimestamp": 1614832964
+    },
+    "error": {
+        "type": "ERROR",
+        "code": 1,
+        "details": "Data not found: "
+    }
+}

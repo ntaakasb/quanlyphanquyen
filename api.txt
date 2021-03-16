@@ -157,3 +157,105 @@ OUTPUT FAILURE
         "details": "Data not found: "
     }
 }
+
+API TÌM KI?M ROLE
+LINK: http://10.96.60.67:8100/internal-api/ocb-authentication/selectRoleInfo
+INPUT
+{
+    "trace": {
+        "userId": "gdv.01",
+        "appCode": "APP_ADMIN",
+        "clientTransId": "5dbed546-05fe-47d8-bb2d-1a85ce5ffcdf",
+        "clientTimestamp": "1614832964"
+    },
+    "data": {
+        "search": {
+            "keyWord": "",
+            "status": "1",
+            "appCode": "APP_ADMIN"
+        },
+        "paging": {
+            "pageNo": 1,
+            "pageSize": 10
+        }
+    }
+}
+
+OUTPUT
+
+{
+    "trace": {
+        "userId": "gdv.01",
+        "appCode": "APP_ADMIN",
+        "clientTransId": "5dbed546-05fe-47d8-bb2d-1a85ce5ffcdf",
+        "clientTimestamp": 1614832964
+    },
+    "result": {
+        "totalRecord": 1,
+        "errorCode": "0",
+        "errorMsg": "SUCCESS",
+        "roleList": [
+            {
+                "roleCode": "SUPERADMIN",
+                "roleName": "APP PHÂN QUY?N",
+                "appCode": "APP_ADMIN",
+                "status": "1",
+                "functionList": [
+                    {
+                        "functionCode": "FUNC_SELECTUSERINFO"
+                    },
+                    {
+                        "functionCode": "FUNC_EXECUTEINTERNALUSERINFO"
+                    }
+                ]
+            }
+        ]
+    },
+    "timestamp": 1615880884
+}
+
+API THÊM M?I/ CH?NH S?A ROLE
+LINK: http://10.96.60.67:8100/internal-api/ocb-authentication/executeRoleInfo
+
+INPUT
+
+{
+  "trace": {
+    "userId": "gdv.01",
+    "appCode": "APP_ADMIN",
+    "clientTransId": "5dbed546-05fe-47d8-bb2d-1a85ce5ffcdf",
+    "clientTimestamp": 1614832964
+  },
+  "data": {
+    "appCode": "APP_ADMIN",
+    "roleCode": "test12",
+    "roleName": "test12",
+    "status": "1",
+    "functionList": [
+      {
+        "functionCode": "FUNC_EXECUTEINTERNALUSERINFO"
+      },
+      {
+        "functionCode": "FUNC_SELECTUSERINFO"
+      }
+    ],
+    "actionType": "INSERT"
+  }
+}
+
+OUTPUT
+
+{
+    "trace": {
+        "userId": "gdv.01",
+        "appCode": "APP_ADMIN",
+        "clientTransId": "5dbed546-05fe-47d8-bb2d-1a85ce5ffcdf",
+        "clientTimestamp": 1614832964
+    },
+    "result": {
+        "totalRecord": 0,
+        "errorCode": "0",
+        "errorMsg": "SUCCESS"
+    },
+    "timestamp": 1614839573
+}

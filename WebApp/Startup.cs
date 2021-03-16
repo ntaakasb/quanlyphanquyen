@@ -16,6 +16,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using Services;
+using Services.Token;
 
 namespace WebApp
 {
@@ -153,6 +154,7 @@ namespace WebApp
         private void RegisterServices(IServiceCollection services)
         {
             services.TryAddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+            services.AddScoped<ITokenBaseService, TokenBaseService>();
             services.AddScoped<IAuthenticateServices, AuthenticateServices>();
             services.AddScoped<IUserService, UserService>();
         }

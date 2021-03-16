@@ -5,10 +5,15 @@ using System.IdentityModel.Tokens.Jwt;
 using System.IO;
 using System.Linq;
 using System.Net;
+using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
 using Base.Common;
+using Base.Constants;
+using Base.Model;
 using Base.Model.Authentication;
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
@@ -23,14 +28,12 @@ namespace WebApp.Controllers
     public class AccountController : Controller
     {
         private readonly IAuthenticateServices _authenticateServices;
-        private readonly UserManager<IdentityUser> _userManager;
-        private readonly SignInManager<IdentityUser> _signInManager;
 
-        public AccountController(IAuthenticateServices authenticateServices, UserManager<IdentityUser> userManager, SignInManager<IdentityUser> signInManager)
+
+        public AccountController(IAuthenticateServices authenticateServices)
         {
             _authenticateServices = authenticateServices;
-            _userManager = userManager;
-            _signInManager = signInManager;
+
         }
         [HttpGet]
         public async Task<IActionResult> Login(string returnUrl = "")
@@ -82,16 +85,127 @@ namespace WebApp.Controllers
                 return View(model);
             }
 
-            var result = _authenticateServices.Login(new Base.Model.LoginRequestModel()
+            var requestAccessToken = _authenticateServices.Login(new Base.Model.LoginRequestModel()
             {
                 username = model.UserAccount,
                 password = model.UserSecret,
                 appCode = "APP_ADMIN"
             });
+            var result = await LoginLogic(requestAccessToken, model);
+            if (result)
+            {
+                return RedirectToLocal(model.ReturnUrl);
+            }
 
+            ModelState.AddModelError(string.Empty, requestAccessToken.errorMsg);
 
             return View(model);
         }
 
+        private async Task<bool> LoginLogic(LoginResultModel requestAccessToken, LoginViewModel model)
+        {
+            if (requestAccessToken.errorCode == 0)
+            {
+                var hand = new JwtSecurityTokenHandler();
+                var tokenString = requestAccessToken.jwttoken;
+                var tokenInfo = hand.ReadJwtToken(tokenString);
+
+                string userId = tokenInfo.Claims.FirstOrDefault().Value;
+                var userInfor = new LoggedUserDetailResponseModel();
+                //var result = await _identityService.GetCurrentUserDetailAsync(tokenString);
+                //if (result.Metadata.Success)
+                //{
+                //    userInfor = result.Results[0];
+                //    if (userInfor.Avatar == null)
+                //    {
+                //        userInfor.Avatar = string.Empty;
+                //    }
+                //}
+
+                ClaimsIdentity identityClaim = new ClaimsIdentity(CookieAuthenticationDefaults.AuthenticationScheme);
+                identityClaim.AddClaims(
+                new List<Claim>()
+                {
+                    new Claim(ClaimTypes.Name, model.UserAccount ?? tokenInfo.Claims.FirstOrDefault(x => x.Type == ClaimTypes.Name).Value),
+                    new Claim(ClaimTypes.NameIdentifier, userId),
+                    new Claim(ClaimTypes.Actor, GetClaimFromLoginResponseModel(requestAccessToken)),
+                    new Claim(ApplicationKey.Token, JsonConvert.SerializeObject(requestAccessToken.jwttoken)),
+                    new Claim(ApplicationKey.UserInfo, JsonConvert.SerializeObject(userInfor))
+                });
+                ClaimsPrincipal principal = new ClaimsPrincipal(identityClaim);
+
+                await HttpContext.SignInAsync(
+                 CookieAuthenticationDefaults.AuthenticationScheme,
+                 principal,
+                 new AuthenticationProperties
+                 {
+                     IsPersistent = false
+                 });
+
+                return true;
+            }
+
+            return false;
+        }
+        private string GetClaimFromLoginResponseModel(LoginResultModel result, string claimTypes = ClaimTypes.NameIdentifier)
+        {
+            var model = result;
+            if (model == null || string.IsNullOrEmpty(model.jwttoken))
+            {
+                return null;
+            }
+
+            return GetClaimFromToken(model.jwttoken, claimTypes);
+        }
+
+        private string GetClaimFromToken(string token, string claimTypes = ClaimTypes.NameIdentifier)
+        {
+            var jwtToken = new JwtSecurityToken(token);
+            var userIdClaim = jwtToken.Claims.First();
+
+            if (userIdClaim == null || string.IsNullOrEmpty(userIdClaim.Value))
+            {
+                return null;
+            }
+
+            return userIdClaim.Value;
+        }
+
+
+        [Authorize]
+        public async Task<IActionResult> Logout()
+        {
+            try
+            {
+                await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
+
+                var appToken = GetTokenFromClaim();
+                //if (appToken != null)
+                //{
+                //    if ((appToken.ExpiresIn - DateTime.UtcNow).TotalMinutes > 0 && !string.IsNullOrEmpty(appToken.Token))
+                //    {
+                //        _identityService.Logout(appToken.Token);
+                //    }
+                //}
+            }
+            catch (Exception ex)
+            {
+            }
+
+            return RedirectToAction("Login", "Account");
+        }
+
+        private AppToken GetTokenFromClaim()
+        {
+            var userIdentity = (ClaimsIdentity)User.Identity;
+            var apiClaim = userIdentity.FindFirst(ApplicationKey.Token);
+            if (apiClaim != null)
+            {
+                var appToken = JsonConvert.DeserializeObject<AppToken>(apiClaim.Value);
+                return appToken;
+            }
+
+            return null;
+        }
     }
 }  

@@ -1,4 +1,6 @@
-﻿using Base.Constants;
+﻿using Base;
+using Base.Common;
+using Base.Constants;
 using Base.Model;
 using Base.Model.User;
 using Services.Common;
@@ -17,11 +19,14 @@ namespace Services
         {
         }
 
-        public async Task<ResultResponseModel<object>> CreateNewUser(UserRequestModel request)
+
+        public UserResponseModel CreateNewUser(PushModel model)
         {
             string errMsg = string.Empty;
-            var result = Post<ResultResponseModel<object>, UserRequestModel>(request, Functions[UserConstant.InsertUser]);
-            return result;
+            UserResponseModel ret = new UserResponseModel();
+            var result = Post<UserResponseModel, PushModel>(model, Functions[UserConstant.InsertUser], token: TokenString);
+            return ret;
+
         }
     }
 }

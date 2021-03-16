@@ -1,4 +1,6 @@
-﻿using Base.Model;
+﻿using Base;
+using Base.Common;
+using Base.Model;
 using Base.Model.User;
 using System;
 using System.Collections.Generic;
@@ -9,7 +11,6 @@ namespace Services
 {
     public interface IUserService
     {
-        Task<ResultResponseModel<object>> CreateNewUser(UserRequestModel request);
-
+        UserResponseModel CreateNewUser(PushModel model);
     }
 }
